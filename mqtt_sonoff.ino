@@ -108,10 +108,11 @@ uint8_t lastStateSwitch = 0;
 
 void relay(char* onof){
   String state = String(onof);
-  if((digitalRead(RELAY) != HIGH) && (state == "ON")){
+  boolean value = digitalRead(RELAY);  // read the relay value one time and use this value two times
+  if((value != HIGH) && (state == "ON")){
     digitalWrite(RELAY, HIGH);//On relay
     digitalWrite(LED, LOW);//On led
-  }else if((digitalRead(RELAY) == HIGH) && (state == "OFF")){
+  }else if((value == HIGH) && (state == "OFF")){
     digitalWrite(RELAY, LOW);//Off relay
     digitalWrite(LED, HIGH);//Off led
   }else{
